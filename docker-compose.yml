@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  diffusion_env:
+    build:
+      context: .
+      args:
+        USER_ID: 1000
+        GROUP_ID: 1000
+    container_name: diffusion_env
+    shm_size: 16g
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/workspace
+    ports:
+      - "5151:5151"
+    networks:
+      - fiftyone_network
+    working_dir: /workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: sleep infinity
+    entrypoint: ""
+
+networks:
+  fiftyone_network:
+    external: true
