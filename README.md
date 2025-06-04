@@ -25,18 +25,16 @@ All dependencies are handled via Docker. You just need:
 - A dataset structured as:
 
 ```
-
 data/train/
-├── inputs/    # Rendered views from 3DGS (e.g., DrivingForward)
-│   ├── 0001.png
-│   ├── 0002.png
-│   └── ...
-├── targets/   # Ground-truth camera views
-│   ├── 0001.png
-│   ├── 0002.png
-│   └── ...
+├── 7fe9547b.../             # Token ID (sample identifier)
+│   ├── 0.png                # Input image (camera 0: CAM_FRONT)
+│   ├── 0_gt.png            # Ground truth for camera 0
+│   ├── 1.png                # Input image (camera 1)
+│   ├── 1_gt.png            # Ground truth for camera 1
+│   ├── ...                 # Repeat for cameras 2–5
+├── ...                     # Other token directories
+```
 
-````
 
 ---
 
