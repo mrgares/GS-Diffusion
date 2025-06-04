@@ -25,7 +25,7 @@ All dependencies are handled via Docker. You just need:
 - A dataset structured as:
 
 ```
-data/train/
+data/
 ├── 7fe9547b.../             # Token ID (sample identifier)
 │   ├── 0.png                # Input image (camera 0: CAM_FRONT)
 │   ├── 0_gt.png            # Ground truth for camera 0
@@ -73,9 +73,6 @@ docker exec -it diffusion_env bash
 ├── requirements.txt
 ├── train.py
 ├── data/
-│   └── train/
-│       ├── inputs/
-│       └── targets/
 └── README.md
 ```
 
