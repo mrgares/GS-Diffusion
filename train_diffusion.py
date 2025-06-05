@@ -28,7 +28,13 @@ def train_diffusion_refiner(
 
             with torch.cuda.amp.autocast():
                 outputs = model(sample=inputs, timestep=torch.tensor([0], device=device)).sample
-                loss = F.l1_loss(outputs, targets)
+                # Rescale to [-1, 1] for LPIPS
+                outputs_lpips = outputs * 2 - 1
+                targets_lpips = targets * 2 - 1
+                loss = (
+                    0.8 * F.l1_loss(outputs, targets)
+                    + 0.2 * lpips_fn(outputs_lpips, targets_lpips).mean()
+                )
 
 
             optimizer.zero_grad()
